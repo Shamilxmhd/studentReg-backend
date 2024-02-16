@@ -26,7 +26,12 @@ exports.register = async (req, res) => {
 exports.getDetails = async (req, res) => {
     try {
         const allStudents = await students.find()
-        res.status(200).json(allStudents)
+        if (allStudents) {
+            res.status(200).json(allStudents)
+        } else {
+            res.status(406).json('NO students found')
+        }
+
     } catch (err) {
         res.status(401).json(err)
     }
